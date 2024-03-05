@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.trianglz.ui.viewmodels.movies.MovieUiModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding_6">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/ivPoster"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/size_300"
+            android:onClick="@{()->vm.onMovieClick()}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:loadSrc="@{vm.movie.imageUrl}"
+            app:shapeAppearanceOverlay="@style/ImageView.Round" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_6"
+            android:background="@color/teal_200"
+            android:padding="@dimen/padding_6"
+            android:text="@{vm.movie.voteAverage}"
+            app:layout_constraintEnd_toEndOf="@id/ivPoster"
+            app:layout_constraintTop_toTopOf="@id/ivPoster" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

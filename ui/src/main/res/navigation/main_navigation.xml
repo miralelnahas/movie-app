@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/moviesFragment">
+
+    <fragment
+        android:id="@+id/moviesFragment"
+        android:name="com.trianglz.ui.views.movies.MoviesFragment"
+        android:label="MoviesFragment">
+        <action
+            android:id="@+id/action_movies_to_movie_details"
+            app:destination="@id/movieDetailsFragment" />
+        <action
+            android:id="@+id/action_movies_to_search"
+            app:destination="@id/searchFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/movieDetailsFragment"
+        android:name="com.trianglz.ui.views.movieDetails.MovieDetailsFragment"
+        android:label="MovieDetailsFragment">
+        <argument
+            android:name="id"
+            app:argType="integer" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.trianglz.ui.views.search.SearchFragment">
+
+        <action
+            android:id="@+id/action_search_to_movie_details"
+            app:destination="@id/movieDetailsFragment" />
+    </fragment>
+</navigation>
