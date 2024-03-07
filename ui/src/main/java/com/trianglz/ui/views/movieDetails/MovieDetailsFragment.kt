@@ -15,15 +15,8 @@ class MovieDetailsFragment :
 
     override fun initViews() {
         super.initViews()
-        hideSystemUI()
-        updateStatusBarColor(Color.TRANSPARENT)
         vb.toolbar.setNavigationOnClickListener {
             vm.onBackClick()
         }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        showSystemUI()
     }
 }

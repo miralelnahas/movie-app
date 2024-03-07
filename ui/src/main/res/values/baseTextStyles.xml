@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Font400" parent="">
+        <item name="fontFamily">@font/roboto_regular</item>
+    </style>
+    <style name="Font500" parent="">
+        <item name="fontFamily">@font/roboto_medium</item>
+    </style>
+    <style name="Font700" parent="">
+        <item name="fontFamily">@font/roboto_bold</item>
+    </style>
+</resources>

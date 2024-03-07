@@ -4,4 +4,12 @@
     <string name="search">Search</string>
     <string name="most_popular">Most Popular</string>
     <string name="top_rated">Top Rated</string>
+    <string name="release_year">Release Year</string>
+    <string name="show_duration">Show Duration</string>
+    <string name="average_rating">Average Rating</string>
+    <string name="description">Description</string>
+    <string name="genres">Genres</string>
+    <string name="production_company">Production Company</string>
+    <string name="production_country">Production Country</string>
+    <string name="spoken_languages">Spoken Languages</string>
 </resources>
