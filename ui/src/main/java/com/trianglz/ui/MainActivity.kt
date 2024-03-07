@@ -1,8 +1,8 @@
 package com.trianglz.ui
 
 import android.os.Bundle
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.addCallback
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -19,9 +19,15 @@ class MainActivity : AppCompatActivity() {
     private fun handleOnBackPressed(navHostFragment: NavHostFragment) {
         onBackPressedDispatcher.addCallback(this) {
             navHostFragment.navController.currentDestination?.id.let {
-                navHostFragment.navController.popBackStack()
+                if (it == R.id.moviesFragment)
+                    finish()
+                else
+                    navHostFragment.navController.popBackStack()
             }
         }
     }
 
+    fun handleBackPressed(callback: OnBackPressedCallback) {
+        onBackPressedDispatcher.addCallback(this, callback)
+    }
 }

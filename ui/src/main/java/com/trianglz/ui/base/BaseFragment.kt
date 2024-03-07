@@ -1,26 +1,17 @@
 package com.trianglz.ui.base
 
-import android.graphics.Color
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import android.widget.Toast
-import androidx.activity.addCallback
 import androidx.annotation.LayoutRes
-import androidx.annotation.RequiresApi
-import androidx.core.content.ContextCompat
-import androidx.core.view.WindowCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import com.trianglz.ui.BR
-import com.trianglz.ui.MainActivity
-import com.trianglz.ui.R
 import com.trianglz.ui.utils.Extensions.observe
 
 abstract class BaseFragment<T : ViewDataBinding>(@LayoutRes private val contentLayoutId: Int) :
@@ -29,7 +20,6 @@ abstract class BaseFragment<T : ViewDataBinding>(@LayoutRes private val contentL
     private var _vb: T? = null
     protected val vb get() = _vb!!
 
-    @RequiresApi(Build.VERSION_CODES.M)
     @Suppress("UNCHECKED_CAST")
     override fun onCreateView(
         inflater: LayoutInflater,

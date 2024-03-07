@@ -9,21 +9,11 @@
             type="com.trianglz.ui.viewmodels.search.SearchViewModel" />
     </data>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <com.google.android.material.search.SearchView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <com.google.android.material.appbar.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/etSearchBar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_scrollFlags="noScroll"
-                android:text="@={vm.searchQuery}"/>
-        </com.google.android.material.appbar.AppBarLayout>
+        android:layout_height="match_parent"
+        android:hint="@string/search"
+        app:layout_anchor="@id/appBar">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvMovies"
@@ -32,6 +22,6 @@
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </com.google.android.material.search.SearchView>
 
 </layout>

@@ -157,7 +157,7 @@
                     android:layout_marginTop="@dimen/margin_16"
                     app:label="@string/spoken_languages"
                     app:layout_constraintTop_toBottomOf="@id/layoutProductionCountries"
-                    app:value="@{vm.productionCountries}"
+                    app:value="@{vm.spokenLanguages}"
                     android:layout_marginBottom="@dimen/margin_16"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintVertical_bias="0"/>
