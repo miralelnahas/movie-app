@@ -6,7 +6,6 @@ import com.trianglz.data.models.movies.Movie
 import com.trianglz.domain.usecases.SearchMoviesUseCase
 import com.trianglz.ui.base.BaseUiModel
 import com.trianglz.ui.utils.ItemClick
-import com.trianglz.ui.viewmodels.movies.MovieUiModel
 import com.trianglz.ui.views.search.SearchEvent
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.channels.Channel
@@ -27,18 +26,11 @@ class SearchUiModel(
 
     private val _searchQuery: MutableStateFlow<String> = MutableStateFlow("")
 
-    fun getSearchQuery() = _searchQuery.value
-    fun setSearchQuery(searchQuery: String) {
-        _searchQuery.value = searchQuery
-    }
-
     var movies: StateFlow<PagingData<Movie>> = _searchQuery
         .debounce(300)
         .flatMapLatest {
             searchMoviesUseCase(it).data.cachedIn(uiModelScope)
         }.toStateFlow(PagingData.empty())
-
-    fun getMovieUiModel(movie: Movie): MovieUiModel = MovieUiModel(movie, this)
 
     override fun onItemClick(t: Movie) {
         sendEvent(_event, SearchEvent.MovieClick(t))

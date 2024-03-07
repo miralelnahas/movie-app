@@ -3,6 +3,7 @@ package com.trianglz.core.database.movies
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.trianglz.data.models.movies.SortType
 
 @Entity
 data class MovieEntity(
@@ -24,5 +25,8 @@ data class MovieEntity(
     val releaseDate: String,
 
     @ColumnInfo(name = "average_vote")
-    val voteAverage: Double
+    val voteAverage: Double,
+
+    @ColumnInfo(name = "sort_type")
+    val sortType: SortType
 )

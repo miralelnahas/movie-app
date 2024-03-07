@@ -5,22 +5,24 @@ import com.trianglz.core.network.movies.response.movieDetails.MovieDetailsRespon
 import com.trianglz.core.network.movies.response.movies.MovieResponse
 import com.trianglz.data.models.movieDetails.MovieDetails
 import com.trianglz.data.models.movies.Movie
+import com.trianglz.data.models.movies.SortType
 
 object Mapper {
     fun MovieResponse.toMovie(): Movie =
-        Movie(id, title, imageUrl ?: "", String.format("%.1f", voteAverage))
+        Movie(id, id, originalTitle, imageUrl ?: "", String.format("%.1f", voteAverage))
 
     fun MovieEntity.toMovie(): Movie =
-        Movie(id, imageUrl, String.format("%.1f", voteAverage))
+        Movie(id, movieId, title, imageUrl, String.format("%.1f", voteAverage))
 
     //TODO: fix values
-    fun MovieResponse.toMovieEntity(): MovieEntity =
+    fun MovieResponse.toMovieEntity(sortType: SortType): MovieEntity =
         MovieEntity(
             movieId = id,
             title = originalTitle,
             imageUrl = imageUrl ?: "",
             releaseDate = "12345",
-            voteAverage = voteAverage
+            voteAverage = voteAverage,
+            sortType = sortType
         )
 
     fun MovieDetailsResponse.toMovieDetails(): MovieDetails =

@@ -8,8 +8,10 @@ import androidx.room.Query
 
 @Dao
 interface MoviesDao {
-    @Query("SELECT * FROM movieentity ORDER BY id")
-    fun getMovies(): PagingSource<Int, MovieEntity>
+    @Query("SELECT * FROM movieentity WHERE sort_type = 'MOST_POPULAR' ORDER BY id")
+    fun getPopularMovies(): PagingSource<Int, MovieEntity>
+    @Query("SELECT * FROM movieentity WHERE sort_type = 'TOP_RATED' ORDER BY id")
+    fun getTopRatedMovies(): PagingSource<Int, MovieEntity>
 
     @Insert(onConflict = REPLACE)
     suspend fun insert(movieEntity: MovieEntity): Long

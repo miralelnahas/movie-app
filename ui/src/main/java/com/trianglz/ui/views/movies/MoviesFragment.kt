@@ -94,7 +94,7 @@ class MoviesFragment : BaseFragment<FragmentMoviesBinding>(R.layout.fragment_mov
     private fun onEventReceived(event: MoviesEvent) {
         when (event) {
             is MoviesEvent.MovieClick -> navigateTo(
-                MoviesFragmentDirections.actionMoviesToMovieDetails(event.movie.id)
+                MoviesFragmentDirections.actionMoviesToMovieDetails(event.movie.movieId)
             )
         }
     }
