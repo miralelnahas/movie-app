@@ -7,18 +7,21 @@ import com.trianglz.data.models.movies.Movie
 
 object Mapper {
     fun MovieResponse.toMovie(): Movie =
-        Movie(id, imageUrl?:"", String.format("%.1f", voteAverage))
+        Movie(id, title, imageUrl ?: "", String.format("%.1f", voteAverage))
 
     fun MovieDetailsResponse.toMovieDetails(): MovieDetails =
         MovieDetails(
             id,
-            originalLanguage ?: "",
             originalTitle ?: "",
             overview ?: "",
             releaseDate ?: "",
             posterPath ?: "",
-            voteAverage ?: 0.0,
-            voteCount ?: 0
+            String.format("%.1f", voteAverage),
+            runtime ?: 0,
+            genres.map { it.name ?: "" },
+            productionCountries.map { it.name ?: "" },
+            productionCompanies.map { it.name ?: "" },
+            spokenLanguages.map { it.englishName ?: "" },
         )
 
 }

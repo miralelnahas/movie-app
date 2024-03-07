@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Font700.18sp" parent="Font700">
+        <item name="android:textSize">@dimen/font_size_18</item>
+    </style>
+
+    <style name="Font700.16sp" parent="Font700">
+        <item name="android:textSize">@dimen/font_size_16</item>
+    </style>
+
+    <style name="Font700.14sp" parent="Font700">
+        <item name="android:textSize">@dimen/font_size_12</item>
+    </style>
+
+    <style name="Font700.12sp" parent="Font700">
+        <item name="android:textSize">@dimen/font_size_12</item>
+    </style>
+
+    <style name="Font500.22sp.white" parent="Font500">
+        <item name="android:textSize">@dimen/font_size_22</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Font400.14sp" parent="Font400">
+        <item name="android:textSize">@dimen/font_size_14</item>
+    </style>
+
+    <style name="Font400.12sp.gray" parent="Font400">
+        <item name="android:textSize">@dimen/font_size_12</item>
+        <item name="android:textColor">@color/gray_300</item>
+    </style>
+</resources>

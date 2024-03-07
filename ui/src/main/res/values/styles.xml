@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="ImageView.Round" parent="">
-        <item name="cornerSize">10%</item>
-    </style>
-    //TODO: add font
-    <style name="ToolbarTitle" parent="">
-        <item name="android:textColor">@color/gray500</item>
-        <item name="android:textSize">@dimen/font_size_18</item>
+        <item name="cornerSize">5%</item>
     </style>
 </resources>

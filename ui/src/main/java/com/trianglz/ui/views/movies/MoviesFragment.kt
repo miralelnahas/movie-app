@@ -28,7 +28,7 @@ class MoviesFragment : BaseFragment<FragmentMoviesBinding>(R.layout.fragment_mov
             when (it.itemId) {
                 R.id.most_popular -> vm.changeSortType(SortType.MOST_POPULAR)
                 R.id.top_rated -> vm.changeSortType(SortType.TOP_RATED)
-                R.id.search -> navigateTo(MoviesFragmentDirections.actionMoviesToSearch())
+//                R.id.search -> navigateTo(MoviesFragmentDirections.actionMoviesToSearch())
             }
             false
         }

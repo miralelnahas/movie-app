@@ -49,7 +49,6 @@ abstract class BaseFragment<T : ViewDataBinding>(@LayoutRes private val contentL
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        updateStatusBarColor(ContextCompat.getColor(requireContext(), R.color.gray200))
         setupObservers()
         initViews()
     }
@@ -87,21 +86,6 @@ abstract class BaseFragment<T : ViewDataBinding>(@LayoutRes private val contentL
         } catch (e: Exception) {
             //TODO: log exception
         }
-    }
-
-    protected fun updateStatusBarColor(color: Int) {
-        requireActivity().window.apply {
-            addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-            statusBarColor = color
-        }
-    }
-
-    protected fun hideSystemUI() {
-        WindowCompat.setDecorFitsSystemWindows(requireActivity().window, false)
-    }
-
-    protected fun showSystemUI() {
-        WindowCompat.setDecorFitsSystemWindows(requireActivity().window, true)
     }
 
 }

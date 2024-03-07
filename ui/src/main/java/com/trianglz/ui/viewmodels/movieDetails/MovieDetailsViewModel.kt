@@ -9,6 +9,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import java.time.LocalDate
 import javax.inject.Inject
 
 @HiltViewModel
@@ -18,7 +19,6 @@ class MovieDetailsViewModel @Inject constructor(
 ) : BaseViewModel() {
     private val _movieDetails: MutableStateFlow<MovieDetails?> =
         MutableStateFlow(null)
-//    val movieDetails: StateFlow<MovieDetails?> = _movieDetails
 
     val posterUrl = _movieDetails.map {
         it?.posterPath ?: ""
@@ -27,22 +27,38 @@ class MovieDetailsViewModel @Inject constructor(
     val movieTitle = _movieDetails.map {
         it?.originalTitle ?: ""
     }.toStateFlow("")
-
-    val originalLanguage = _movieDetails.map {
-        it?.originalLanguage ?: ""
-    }.toStateFlow("")
     val overview = _movieDetails.map {
         it?.overview ?: ""
     }.toStateFlow("")
     val releaseDate = _movieDetails.map {
-        it?.releaseDate ?: ""
+        it?.releaseDate?.let { releaseDate ->
+            LocalDate.parse(releaseDate).year.toString()
+        } ?: ""
     }.toStateFlow("")
     val voteAverage = _movieDetails.map {
-        it?.voteAverage ?: 0.0
-    }.toStateFlow(0.0)
-    val voteCount = _movieDetails.map {
-        it?.voteCount ?: 0
-    }.toStateFlow(0)
+        it?.voteAverage
+    }.toStateFlow("")
+    val duration = _movieDetails.map {
+        it?.duration?.let { duration ->
+            val hours = duration / 60
+            val minutes = duration % 60
+            val hourString = if (hours > 0) "${hours}h " else ""
+            val minuteString = "${minutes}m"
+            "$hourString $minuteString"
+        } ?: ""
+    }.toStateFlow("")
+    val genres = _movieDetails.map {
+        it?.genres?.joinToString(", ") ?: ""
+    }.toStateFlow("")
+    val productionCompanies = _movieDetails.map {
+        it?.productionCompanies?.joinToString(", ") ?: ""
+    }.toStateFlow("")
+    val productionCountries = _movieDetails.map {
+        it?.productionCountries?.joinToString(", ") ?: ""
+    }.toStateFlow("")
+    val spokenLanguages = _movieDetails.map {
+        it?.spokenLanguages?.joinToString(", ") ?: ""
+    }.toStateFlow("")
 
 
     init {
