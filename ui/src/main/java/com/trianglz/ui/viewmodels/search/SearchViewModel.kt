@@ -10,7 +10,6 @@ import com.trianglz.ui.utils.ItemClick
 import com.trianglz.ui.viewmodels.movies.MovieUiModel
 import com.trianglz.ui.views.search.SearchEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -33,11 +32,11 @@ class SearchViewModel @Inject constructor(private val searchMoviesUseCase: Searc
         _searchQuery.value = searchQuery
     }
 
-    var movies: StateFlow<PagingData<Movie>> = _searchQuery
+    val movies: StateFlow<PagingData<Movie>> = _searchQuery
         .debounce(300)
         .flatMapLatest {
-            searchMoviesUseCase(it).data.cachedIn(viewModelScope)
-        }.toStateFlow(PagingData.empty())
+            searchMoviesUseCase(it).data
+        }.cachedIn(viewModelScope).toStateFlow(PagingData.empty())
 
     fun getMovieUiModel(movie: Movie): MovieUiModel = MovieUiModel(movie, this)
 

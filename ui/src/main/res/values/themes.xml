@@ -15,7 +15,7 @@
 
     <style name="Theme.Movies.SplashScreen" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/gray_800</item>
-        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_logo_foreground</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_logo</item>
         <item name="windowSplashScreenAnimationDuration">1000</item>
         <item name="postSplashScreenTheme">@style/Theme.Movies</item>
     </style>

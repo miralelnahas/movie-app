@@ -1,4 +1,4 @@
-package com.trianglz.core.datasources
+package com.trianglz.core.network.movies.response.movies
 
 import com.trianglz.core.datasources.Mapper.toMovie
 import com.trianglz.core.network.RetrofitClientExt.apiCall
