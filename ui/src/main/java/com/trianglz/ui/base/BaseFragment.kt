@@ -9,14 +9,15 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import com.trianglz.ui.BR
-import com.trianglz.ui.utils.Extensions.observe
+import kotlinx.coroutines.launch
 
-abstract class BaseFragment<T : ViewDataBinding>(@LayoutRes private val contentLayoutId: Int) :
+abstract class BaseFragment<T : ViewDataBinding, I : BaseIntent, D : Any>(@LayoutRes private val contentLayoutId: Int) :
     Fragment() {
-    protected abstract val vm: BaseViewModel
+    protected abstract val vm: BaseViewModel<I, D>
     private var _vb: T? = null
     protected val vb get() = _vb!!
 
@@ -55,11 +56,11 @@ abstract class BaseFragment<T : ViewDataBinding>(@LayoutRes private val contentL
     }
 
     open fun setupObservers() {
-        observe(vm.baseEvent) {
-            when (it) {
-                BaseEvent.Back -> activity?.onBackPressedDispatcher?.onBackPressed()
-            }
-        }
+
+    }
+
+    protected fun onBackPressed() {
+        activity?.onBackPressedDispatcher?.onBackPressed()
     }
 
     protected fun showToast(message: String?) =
@@ -75,6 +76,12 @@ abstract class BaseFragment<T : ViewDataBinding>(@LayoutRes private val contentL
             findNavController().navigate(navDirections)
         } catch (e: Exception) {
             //TODO: log exception
+        }
+    }
+
+    fun sendIntent(intent: I) {
+        lifecycleScope.launch {
+            vm.dataIntentChannel.send(intent)
         }
     }
 

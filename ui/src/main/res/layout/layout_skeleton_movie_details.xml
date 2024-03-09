@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <com.facebook.shimmer.ShimmerFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:shimmer_auto_start="true"
+        app:shimmer_base_alpha="0.5">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_constraintTop_toTopOf="parent"
+                app:navigationIcon="@drawable/ic_arrow_back" />
+
+            <include
+                android:id="@+id/rect1"
+                layout="@layout/layout_skeleton_rect"
+                android:layout_width="@dimen/size_120"
+                android:layout_height="@dimen/size_180"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+            <include
+                android:id="@+id/rect2"
+                layout="@layout/layout_skeleton_rect"
+                android:layout_width="@dimen/size_120"
+                android:layout_height="@dimen/size_24"
+                android:layout_marginTop="@dimen/margin_16"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rect1" />
+
+            <include
+                android:id="@+id/rect3"
+                layout="@layout/layout_skeleton_rect"
+                android:layout_width="@dimen/size_80"
+                android:layout_height="@dimen/size_80"
+                android:layout_marginTop="@dimen/margin_24"
+                app:layout_constraintEnd_toStartOf="@id/rect4"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rect2" />
+
+            <include
+                android:id="@+id/rect4"
+                layout="@layout/layout_skeleton_rect"
+                android:layout_width="@dimen/size_80"
+                android:layout_height="@dimen/size_80"
+                app:layout_constraintEnd_toStartOf="@id/rect5"
+                app:layout_constraintStart_toEndOf="@id/rect3"
+                app:layout_constraintTop_toTopOf="@id/rect3" />
+
+            <include
+                android:id="@+id/rect5"
+                layout="@layout/layout_skeleton_rect"
+                android:layout_width="@dimen/size_80"
+                android:layout_height="@dimen/size_80"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/rect4"
+                app:layout_constraintTop_toTopOf="@id/rect3" />
+
+            <include
+                android:id="@+id/rect6"
+                layout="@layout/layout_skeleton_rect"
+                android:layout_width="@dimen/size_0"
+                android:layout_height="@dimen/size_120"
+                android:layout_marginHorizontal="@dimen/margin_16"
+                android:layout_marginTop="@dimen/margin_40"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rect3" />
+
+            <include
+                android:id="@+id/rect7"
+                layout="@layout/layout_skeleton_rect"
+                android:layout_width="@dimen/size_0"
+                android:layout_height="@dimen/size_24"
+                android:layout_marginHorizontal="@dimen/margin_16"
+                android:layout_marginTop="@dimen/margin_16"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rect6" />
+
+            <include
+                android:id="@+id/rect8"
+                layout="@layout/layout_skeleton_rect"
+                android:layout_width="@dimen/size_0"
+                android:layout_height="@dimen/size_24"
+                android:layout_marginHorizontal="@dimen/margin_16"
+                android:layout_marginTop="@dimen/margin_16"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rect7" />
+
+            <include
+                android:id="@+id/rect9"
+                layout="@layout/layout_skeleton_rect"
+                android:layout_width="@dimen/size_0"
+                android:layout_height="@dimen/size_24"
+                android:layout_marginHorizontal="@dimen/margin_16"
+                android:layout_marginTop="@dimen/margin_16"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rect8" />
+
+            <include
+                android:id="@+id/rect10"
+                layout="@layout/layout_skeleton_rect"
+                android:layout_width="@dimen/size_0"
+                android:layout_height="@dimen/size_24"
+                android:layout_marginHorizontal="@dimen/margin_16"
+                android:layout_marginTop="@dimen/margin_16"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rect9" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.facebook.shimmer.ShimmerFrameLayout>
+</layout>

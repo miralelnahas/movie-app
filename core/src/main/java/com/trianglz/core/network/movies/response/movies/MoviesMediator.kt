@@ -62,7 +62,7 @@ class MoviesMediator(
             val endOfPagination = response.isEmpty()
 
             database.withTransaction {
-                if (loadType == LoadType.REFRESH) {
+                if (loadType == LoadType.REFRESH && response.isNotEmpty()) {
                     database.remoteKeyDao().clearRemoteKeys()
                     database.movieEntityDao().clearAll()
                 }

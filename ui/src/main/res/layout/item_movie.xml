@@ -5,7 +5,7 @@
 
         <variable
             name="vm"
-            type="com.trianglz.ui.viewmodels.movies.MovieUiModel" />
+            type="com.trianglz.data.models.movies.Movie" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -18,10 +18,9 @@
             android:id="@+id/ivPoster"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/size_230"
-            android:onClick="@{()->vm.onMovieClick()}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:loadSrc="@{vm.movie.imageUrl}"
+            app:loadSrc="@{vm.imageUrl}"
             app:shapeAppearanceOverlay="@style/ImageView.Round" />
 
         <TextView
@@ -32,7 +31,7 @@
             android:layout_marginTop="@dimen/margin_4"
             android:ellipsize="end"
             android:lines="1"
-            android:text="@{vm.movie.title}"
+            android:text="@{vm.title}"
             app:layout_constraintStart_toStartOf="@id/ivPoster"
             app:layout_constraintTop_toBottomOf="@id/ivPoster" />
 
@@ -51,7 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_4"
-            android:text="@{vm.movie.voteAverage}"
+            android:text="@{vm.voteAverage}"
             app:layout_constraintBottom_toBottomOf="@id/ivRate"
             app:layout_constraintStart_toEndOf="@id/ivRate"
             app:layout_constraintTop_toTopOf="@id/ivRate" />

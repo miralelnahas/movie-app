@@ -24,6 +24,6 @@ object RetrofitClientExt {
                 e.printStackTrace()
                 Result.failure(Exception())
             }
-        }
+        }.onFailure { throwable -> return Result.failure(throwable) }
     }
 }

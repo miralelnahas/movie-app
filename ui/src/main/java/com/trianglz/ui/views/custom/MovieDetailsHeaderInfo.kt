@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.databinding.BindingAdapter
 import com.trianglz.ui.R
 
 class MovieDetailsHeaderInfo @JvmOverloads constructor(
@@ -34,8 +33,6 @@ class MovieDetailsHeaderInfo @JvmOverloads constructor(
 
     companion object {
 
-        @JvmStatic
-        @BindingAdapter("app:value")
         fun MovieDetailsHeaderInfo.setValue(value: String?) {
             findViewById<TextView>(R.id.tvValue).text = value
         }

@@ -3,10 +3,8 @@ package com.trianglz.ui.views.custom
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.databinding.BindingAdapter
 import com.trianglz.ui.R
 
 class MovieDetailsRow @JvmOverloads constructor(
@@ -31,9 +29,6 @@ class MovieDetailsRow @JvmOverloads constructor(
     }
 
     companion object {
-
-        @JvmStatic
-        @BindingAdapter("app:value")
         fun MovieDetailsRow.setValue(value: String?) {
             findViewById<TextView>(R.id.tvValue).text = value
         }

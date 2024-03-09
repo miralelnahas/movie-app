@@ -2,41 +2,46 @@ package com.trianglz.ui.viewmodels.search
 
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import com.trianglz.data.DataState
 import com.trianglz.data.models.movies.Movie
 import com.trianglz.domain.usecases.SearchMoviesUseCase
 import com.trianglz.ui.base.BaseUiModel
-import com.trianglz.ui.utils.ItemClick
-import com.trianglz.ui.views.search.SearchEvent
+import com.trianglz.ui.views.movies.SearchIntent
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.debounce
-import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.launch
 
 
 class SearchUiModel(
     private val uiModelScope: CoroutineScope,
     private val searchMoviesUseCase: SearchMoviesUseCase
-) : BaseUiModel(uiModelScope), ItemClick<Movie> {
-
-    private val _event = Channel<SearchEvent>(Channel.BUFFERED)
-    val event = _event.receiveAsFlow()
+) : BaseUiModel<PagingData<Movie>, SearchIntent>(uiModelScope) {
 
     private val _searchQuery: MutableStateFlow<String> = MutableStateFlow("")
 
-    var movies: StateFlow<PagingData<Movie>> = _searchQuery
-        .debounce(300)
-        .flatMapLatest {
-            searchMoviesUseCase(it).data.cachedIn(uiModelScope)
-        }.toStateFlow(PagingData.empty())
-
-    override fun onItemClick(t: Movie) {
-        sendEvent(_event, SearchEvent.MovieClick(t))
+    override fun onTriggerEvent(event: SearchIntent) {
+        when (event) {
+            is SearchIntent.UpdateSearchQuery -> updateSearchQuery(event.searchQuery)
+            is SearchIntent.SearchMovies -> searchMovies()
+        }
     }
 
-    fun updateSearchQuery(query: String) {
+    private fun updateSearchQuery(query: String) {
         _searchQuery.value = query
+    }
+
+    private fun searchMovies() {
+        uiModelScope.launch {
+            _searchQuery
+                .debounce(300)
+                .collectLatest {
+                    searchMoviesUseCase(it).data.cachedIn(uiModelScope)
+                        .collectLatest { pagingData ->
+                            _dataState.value = DataState.Success(pagingData)
+                        }
+                }
+        }
     }
 }

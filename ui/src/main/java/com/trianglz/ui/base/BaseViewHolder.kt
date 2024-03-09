@@ -10,12 +10,11 @@ import com.trianglz.ui.BR
 
 open class BaseViewHolder(private val viewDataBinding: ViewDataBinding) :
     RecyclerView.ViewHolder(viewDataBinding.root) {
-    fun <T> bind(vm: T) {
+    fun <T> bind(vm: T) : ViewDataBinding =
         viewDataBinding.apply {
             setVariable(BR.vm, vm)
             executePendingBindings()
         }
-    }
 
     companion object {
         fun from(parent: ViewGroup, @LayoutRes res: Int): BaseViewHolder {
