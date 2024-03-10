@@ -52,10 +52,6 @@ class MovieDetailsFragment :
 
     private fun setViewValues(movieDetails: MovieDetails) {
         vb.layoutMovieDetails.apply {
-            tvTitle.text = movieDetails.originalTitle
-            ivPoster.loadSrc(movieDetails.posterPath)
-            toolbar.title = movieDetails.originalTitle
-            tvDescriptionValue.text = movieDetails.overview
             layoutGenres.setValue(movieDetails.genres.joinToString(", "))
             layoutProductionCompanies.setValue(movieDetails.productionCompanies.joinToString(", "))
             layoutProductionCountries.setValue(movieDetails.productionCountries.joinToString(", "))

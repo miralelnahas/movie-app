@@ -15,7 +15,8 @@
         <include
             android:id="@+id/layoutMovieDetails"
             layout="@layout/layout_movie_details"
-            app:goneUnless="@{vm.dataState instanceof DataState.Success}"/>
+            app:goneUnless="@{vm.dataState instanceof DataState.Success}"
+            app:movie="@{vm.dataState.toData()}"/>
 
         <include
             android:id="@+id/layoutLoader"

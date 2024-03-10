@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
-
+    <data>
+        <variable
+            name="movie"
+            type="com.trianglz.data.models.movieDetails.MovieDetails" />
+    </data>
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/container"
@@ -13,7 +17,8 @@
             android:layout_height="?attr/actionBarSize"
             app:layout_constraintTop_toTopOf="parent"
             app:navigationIcon="@drawable/ic_arrow_back"
-            app:titleTextAppearance="@style/Font500.22sp.white" />
+            app:titleTextAppearance="@style/Font500.22sp.white"
+            app:title="@{movie.originalTitle}"/>
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -34,7 +39,8 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:shapeAppearanceOverlay="@style/ImageView.Round" />
+                    app:shapeAppearanceOverlay="@style/ImageView.Round"
+                    app:loadSrc="@{movie.posterPath}"/>
 
                 <TextView
                     android:id="@+id/tvTitle"
@@ -44,7 +50,8 @@
                     android:layout_marginTop="@dimen/margin_16"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/ivPoster" />
+                    app:layout_constraintTop_toBottomOf="@id/ivPoster"
+                    android:text="@{movie.originalTitle}"/>
 
                 <com.trianglz.ui.views.custom.MovieDetailsHeaderInfo
                     android:id="@+id/layoutReleaseDate"
@@ -104,6 +111,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/margin_16"
                     android:layout_marginTop="@dimen/margin_8"
+                    android:text="@{movie.overview}"
                     app:layout_constraintTop_toBottomOf="@id/tvDescriptionLabel" />
 
                 <com.trianglz.ui.views.custom.MovieDetailsRow
