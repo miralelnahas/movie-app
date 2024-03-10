@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
+
     <data>
+
         <variable
             name="movie"
             type="com.trianglz.data.models.movieDetails.MovieDetails" />
     </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/container"
@@ -17,8 +20,8 @@
             android:layout_height="?attr/actionBarSize"
             app:layout_constraintTop_toTopOf="parent"
             app:navigationIcon="@drawable/ic_arrow_back"
-            app:titleTextAppearance="@style/Font500.22sp.white"
-            app:title="@{movie.originalTitle}"/>
+            app:title="@{movie.originalTitle}"
+            app:titleTextAppearance="@style/Font500.22sp.white" />
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -39,19 +42,20 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:shapeAppearanceOverlay="@style/ImageView.Round"
-                    app:loadSrc="@{movie.posterPath}"/>
+                    app:loadSrc="@{movie.posterPath}"
+                    app:shapeAppearanceOverlay="@style/ImageView.Round" />
 
                 <TextView
                     android:id="@+id/tvTitle"
                     style="@style/Font700.18sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/margin_16"
                     android:layout_marginTop="@dimen/margin_16"
+                    android:text="@{movie.originalTitle}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/ivPoster"
-                    android:text="@{movie.originalTitle}"/>
+                    app:layout_constraintTop_toBottomOf="@id/ivPoster" />
 
                 <com.trianglz.ui.views.custom.MovieDetailsHeaderInfo
                     android:id="@+id/layoutReleaseDate"

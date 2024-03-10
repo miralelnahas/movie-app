@@ -16,20 +16,19 @@
         android:layout_height="match_parent">
 
         <include
-            android:id="@+id/layoutLoader"
-            layout="@layout/layout_skeleton_movies"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:goneUnless="@{vm.dataState instanceof DataState.Loading}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <include
             android:id="@+id/layoutMovies"
             layout="@layout/layout_movies"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:goneUnless="@{vm.dataState instanceof DataState.Success}" />
+
+        <include
+            android:id="@+id/layoutLoader"
+            layout="@layout/layout_skeleton_movies"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <include
             android:id="@+id/layoutNoInternetConnection"

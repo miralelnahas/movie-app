@@ -2,6 +2,8 @@ package com.trianglz.ui.views.movies
 
 import android.content.Context
 import android.view.MenuItem
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
 import androidx.core.view.forEach
@@ -118,6 +120,13 @@ class MoviesFragment :
             }
             handleMenuItemClick(appBar)
         }
+        moviesAdapter.addLoadStateListener {
+            if ((it.refresh is LoadState.NotLoading && it.prepend.endOfPaginationReached)
+                || it.mediator?.prepend?.endOfPaginationReached == true
+            ) {
+                stopLoader()
+            }
+        }
     }
 
     private fun handleMenuItemClick(appBar: SearchBar) {
@@ -153,12 +162,11 @@ class MoviesFragment :
 
     private fun onMoviesStateChanged(state: DataState<PagingData<Movie>>) {
         when (state) {
-            is DataState.Loading -> {
+            DataState.Loading -> {
                 startLoader()
             }
 
             is DataState.Success -> {
-                stopLoader()
                 moviesAdapter.submitData(viewLifecycleOwner.lifecycle, state.data)
             }
 
@@ -187,23 +195,23 @@ class MoviesFragment :
 
     private fun startLoader() {
         vb.layoutLoader.shimmerContainer.apply {
-            postDelayed(
-                {
-                    startShimmer()
-                }, LOADER_DELAY
-            )
+            post {
+                visibility = VISIBLE
+                startShimmer()
+            }
         }
     }
 
     private fun stopLoader() {
         vb.layoutLoader.shimmerContainer.apply {
-            postDelayed({
+            post {
+                visibility = GONE
                 stopShimmer()
-            }, LOADER_DELAY)
+            }
         }
     }
 
     companion object {
-        private const val LOADER_DELAY = 500L
+        private const val LOADER_DELAY = 100L
     }
 }

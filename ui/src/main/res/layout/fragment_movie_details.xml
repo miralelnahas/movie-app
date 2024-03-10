@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <data>
+
         <variable
             name="vm"
             type="com.trianglz.ui.viewmodels.movieDetails.MovieDetailsViewModel" />
@@ -16,24 +18,24 @@
             android:id="@+id/layoutMovieDetails"
             layout="@layout/layout_movie_details"
             app:goneUnless="@{vm.dataState instanceof DataState.Success}"
-            app:movie="@{vm.dataState.toData()}"/>
+            app:movie="@{vm.dataState.toData()}" />
 
         <include
             android:id="@+id/layoutLoader"
             layout="@layout/layout_skeleton_movie_details"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:goneUnless="@{vm.dataState instanceof DataState.Loading}"/>
+            app:goneUnless="@{vm.dataState instanceof DataState.Loading}"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <include
             android:id="@+id/layoutNoInternetConnection"
             layout="@layout/layout_no_network"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:goneUnless="@{vm.dataState instanceof DataState.Error}"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:goneUnless="@{vm.dataState instanceof DataState.Error}"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

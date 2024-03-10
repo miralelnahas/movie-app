@@ -33,7 +33,7 @@ class MovieDetailsFragment :
 
                 }
 
-                is DataState.Loading -> {
+                DataState.Loading -> {
                     startLoader()
                 }
 
@@ -71,21 +71,17 @@ class MovieDetailsFragment :
 
     private fun startLoader() {
         vb.layoutLoader.container.apply {
-            postDelayed({
+            post {
                 startShimmer()
-            }, LOADER_DELAY)
+            }
         }
     }
 
     private fun stopLoader() {
         vb.layoutLoader.container.apply {
-            postDelayed({
+            post {
                 stopShimmer()
-            }, LOADER_DELAY)
+            }
         }
-    }
-
-    companion object {
-        private const val LOADER_DELAY = 500L
     }
 }
