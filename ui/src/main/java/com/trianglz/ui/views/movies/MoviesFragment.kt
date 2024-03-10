@@ -82,6 +82,9 @@ class MoviesFragment :
         observe(vm.searchUiModel.dataState) {
             onSearchStateChanged(it)
         }
+        observe(vm.sortType) {
+            updateMenuItemIcon(it)
+        }
     }
 
     private fun initSearchViews() {
@@ -130,7 +133,6 @@ class MoviesFragment :
 
     private fun onMenuItemClick(sortType: SortType) {
         sendIntent(MovieIntent.ChangeSortType(sortType))
-        updateMenuItemIcon(sortType)
     }
 
     private fun updateMenuItemIcon(selectedSortType: SortType) {
@@ -165,8 +167,7 @@ class MoviesFragment :
             }
 
             is DataState.Empty -> {
-                //TODO: fix sort when clicking back after opening movie from top_rated
-                updateMenuItemIcon(SortType.MOST_POPULAR)
+
             }
 
             else -> {}

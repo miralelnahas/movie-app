@@ -10,6 +10,9 @@ import com.trianglz.ui.base.BasePagingViewModel
 import com.trianglz.ui.viewmodels.search.SearchUiModel
 import com.trianglz.ui.views.movies.MovieIntent
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 
 @HiltViewModel
@@ -19,7 +22,8 @@ class MoviesViewModel @Inject constructor(
     isNetworkConnectedUseCase: IsNetworkConnectedUseCase
 ) : BasePagingViewModel<MovieIntent, Movie>(isNetworkConnectedUseCase) {
 
-    private var _sortType: SortType = SortType.MOST_POPULAR
+    private val _sortType: MutableStateFlow<SortType> = MutableStateFlow(SortType.MOST_POPULAR)
+    val sortType: StateFlow<SortType> = _sortType.asStateFlow()
 
     val searchUiModel = SearchUiModel(viewModelScope, searchMoviesUseCase)
 
@@ -32,12 +36,12 @@ class MoviesViewModel @Inject constructor(
 
     private fun loadMovies() {
         launchPagingRequest {
-            getMoviesUseCase(_sortType).data
+            getMoviesUseCase(_sortType.value).data
         }
     }
 
     private fun changeSortType(sortType: SortType) {
-        _sortType = sortType
+        _sortType.value = sortType
         loadMovies()
     }
 }

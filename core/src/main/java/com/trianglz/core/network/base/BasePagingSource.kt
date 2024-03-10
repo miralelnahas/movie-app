@@ -9,9 +9,6 @@ abstract class BasePagingSource<T : Any> : PagingSource<Int, T>() {
 
     protected var response: List<T> = listOf()
 
-    protected val _itemCount = MutableStateFlow(0)
-    val itemCount: StateFlow<Int> = _itemCount
-
     abstract override suspend fun load(params: LoadParams<Int>): LoadResult<Int, T>
 
     override fun getRefreshKey(state: PagingState<Int, T>): Int? =

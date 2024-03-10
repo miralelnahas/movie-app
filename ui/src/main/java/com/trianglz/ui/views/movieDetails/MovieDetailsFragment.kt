@@ -6,7 +6,6 @@ import com.trianglz.data.models.movieDetails.MovieDetails
 import com.trianglz.ui.R
 import com.trianglz.ui.base.BaseFragment
 import com.trianglz.ui.databinding.FragmentMovieDetailsBinding
-import com.trianglz.ui.utils.BindingAdapters.loadSrc
 import com.trianglz.ui.utils.Extensions.observe
 import com.trianglz.ui.viewmodels.movieDetails.MovieDetailsViewModel
 import com.trianglz.ui.views.custom.MovieDetailsHeaderInfo.Companion.setValue
