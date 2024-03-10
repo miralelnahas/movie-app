@@ -1,6 +1,8 @@
 package com.trianglz.core.di
 
 import com.trianglz.core.datasources.MoviesDataSourceImpl
+import com.trianglz.core.managers.ConnectionManagerImpl
+import com.trianglz.data.managers.ConnectionManager
 import com.trianglz.data.repositories.MoviesDataSource
 import com.trianglz.data.repositories.MoviesRepository
 import com.trianglz.data.repositories.MoviesRepositoryImpl
@@ -18,4 +20,7 @@ abstract class CoreComponents {
 
     @Binds
     abstract fun moviesRemoteDs(moviesDataSourceImpl: MoviesDataSourceImpl): MoviesDataSource
+
+    @Binds
+    abstract fun connectionManager(connectionManagerImpl: ConnectionManagerImpl): ConnectionManager
 }

@@ -4,80 +4,40 @@
 
     <data>
 
+        <import type="com.trianglz.data.DataState" />
+
         <variable
             name="vm"
             type="com.trianglz.ui.viewmodels.movies.MoviesViewModel" />
     </data>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.google.android.material.appbar.AppBarLayout
+        <include
+            android:id="@+id/layoutLoader"
+            layout="@layout/layout_skeleton_movies"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/gray_800">
+            app:goneUnless="@{vm.dataState instanceof DataState.Loading}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.search.SearchBar
-                android:id="@+id/appBar"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/size_40"
-                android:backgroundTint="@color/gray_900"
-                android:hint="@string/search"
-                app:layout_constraintTop_toTopOf="parent"
-                app:menu="@menu/menu_app_bar" />
-        </com.google.android.material.appbar.AppBarLayout>
-
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvMovies"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/margin_8"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
-        <com.google.android.material.search.SearchView
-            android:id="@+id/searchView"
+        <include
+            android:id="@+id/layoutMovies"
+            layout="@layout/layout_movies"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="@string/search"
-            app:backgroundTint="@color/gray_800"
-            app:layout_anchor="@id/appBar">
+            app:goneUnless="@{vm.dataState instanceof DataState.Success}" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvMoviesSearch"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/margin_8"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager" />
-
-        </com.google.android.material.search.SearchView>
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-
-    <!--        <com.google.android.material.navigation.NavigationView-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="match_parent"-->
-    <!--            android:background="@color/gray200"-->
-    <!--            android:layout_gravity="end">-->
-    <!--            <LinearLayout-->
-    <!--                android:layout_width="match_parent"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:orientation="vertical">-->
-    <!--                <RadioGroup-->
-    <!--                    android:layout_width="match_parent"-->
-    <!--                    android:layout_height="wrap_content">-->
-    <!--                    <RadioButton-->
-    <!--                        android:layout_width="wrap_content"-->
-    <!--                        android:layout_height="wrap_content"-->
-    <!--                        android:text="Most Popular"/>-->
-    <!--                    <RadioButton-->
-    <!--                        android:layout_width="wrap_content"-->
-    <!--                        android:layout_height="wrap_content"-->
-    <!--                        android:text="Top Rated"/>-->
-    <!--                </RadioGroup>-->
-    <!--            </LinearLayout>-->
-    <!--        </com.google.android.material.navigation.NavigationView>-->
-    <!--    </androidx.drawerlayout.widget.DrawerLayout>-->
+        <include
+            android:id="@+id/layoutNoInternetConnection"
+            layout="@layout/layout_no_network"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:goneUnless="@{vm.dataState instanceof DataState.Error}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

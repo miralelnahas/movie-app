@@ -9,9 +9,11 @@
         <menu>
             <item
                 android:id="@+id/most_popular"
+                android:icon="@drawable/ic_radio_button_selected"
                 android:title="@string/most_popular" />
             <item
                 android:id="@+id/top_rated"
+                android:icon="@drawable/ic_radio_button_unselected"
                 android:title="@string/top_rated" />
         </menu>
     </item>

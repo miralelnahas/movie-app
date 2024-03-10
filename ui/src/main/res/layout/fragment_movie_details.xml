@@ -1,169 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
-
     <data>
-
         <variable
             name="vm"
             type="com.trianglz.ui.viewmodels.movieDetails.MovieDetailsViewModel" />
+
+        <import type="com.trianglz.data.DataState" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+        <include
+            android:id="@+id/layoutMovieDetails"
+            layout="@layout/layout_movie_details"
+            app:goneUnless="@{vm.dataState instanceof DataState.Success}"/>
+
+        <include
+            android:id="@+id/layoutLoader"
+            layout="@layout/layout_skeleton_movie_details"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:layout_collapseMode="pin"
+            android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
-            app:navigationIcon="@drawable/ic_arrow_back"
-            app:title="@{vm.movieTitle}"
-            app:titleTextAppearance="@style/Font500.22sp.white" />
+            app:goneUnless="@{vm.dataState instanceof DataState.Loading}"/>
 
-        <androidx.core.widget.NestedScrollView
+        <include
+            android:id="@+id/layoutNoInternetConnection"
+            layout="@layout/layout_no_network"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/size_0"
-            android:fillViewport="true"
+            android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbar">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/ivPoster"
-                    android:layout_width="@dimen/size_120"
-                    android:layout_height="@dimen/size_180"
-                    android:scaleType="centerInside"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:loadSrc="@{vm.posterUrl}"
-                    app:shapeAppearanceOverlay="@style/ImageView.Round" />
-
-                <TextView
-                    android:id="@+id/tvTitle"
-                    style="@style/Font700.18sp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_16"
-                    android:text="@{vm.movieTitle}"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/ivPoster" />
-
-                <com.trianglz.ui.views.custom.MovieDetailsHeaderInfo
-                    android:id="@+id/layoutReleaseDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_24"
-                    app:icon="@drawable/ic_calendar"
-                    app:label="@string/release_year"
-                    app:layout_constraintEnd_toStartOf="@id/layoutDuration"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tvTitle"
-                    app:value="@{vm.releaseDate}" />
-
-                <com.trianglz.ui.views.custom.MovieDetailsHeaderInfo
-                    android:id="@+id/layoutDuration"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:icon="@drawable/ic_duration"
-                    app:label="@string/show_duration"
-                    app:layout_constraintEnd_toStartOf="@id/layoutRating"
-                    app:layout_constraintStart_toEndOf="@id/layoutReleaseDate"
-                    app:layout_constraintTop_toTopOf="@id/layoutReleaseDate"
-                    app:value="@{vm.duration}" />
-
-                <com.trianglz.ui.views.custom.MovieDetailsHeaderInfo
-                    android:id="@+id/layoutRating"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:icon="@drawable/ic_rate_star"
-                    app:label="@string/average_rating"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/layoutDuration"
-                    app:layout_constraintTop_toTopOf="@id/layoutReleaseDate"
-                    app:value="@{vm.voteAverage}" />
-
-                <View
-                    android:id="@+id/layoutBackground"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/size_0"
-                    android:layout_marginTop="@dimen/margin_16"
-                    android:background="@drawable/bg_rounded_corners"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/layoutRating"/>
-
-                <TextView
-                    android:id="@+id/tvDescriptionLabel"
-                    style="@style/Font700.14sp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/margin_16"
-                    android:layout_marginTop="@dimen/margin_24"
-                    android:text="@string/description"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/layoutBackground" />
-
-                <TextView
-                    android:id="@+id/tvDescriptionValue"
-                    style="@style/Font400.14sp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/margin_16"
-                    android:layout_marginTop="@dimen/margin_8"
-                    android:text="@{vm.overview}"
-                    app:layout_constraintTop_toBottomOf="@id/tvDescriptionLabel" />
-
-                <com.trianglz.ui.views.custom.MovieDetailsRow
-                    android:id="@+id/layoutGenres"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/margin_16"
-                    android:layout_marginTop="@dimen/margin_16"
-                    app:label="@string/genres"
-                    app:layout_constraintTop_toBottomOf="@id/tvDescriptionValue"
-                    app:value="@{vm.genres}" />
-
-                <com.trianglz.ui.views.custom.MovieDetailsRow
-                    android:id="@+id/layoutProductionCompanies"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/margin_16"
-                    android:layout_marginTop="@dimen/margin_16"
-                    app:label="@string/production_company"
-                    app:layout_constraintTop_toBottomOf="@id/layoutGenres"
-                    app:value="@{vm.productionCompanies}" />
-
-                <com.trianglz.ui.views.custom.MovieDetailsRow
-                    android:id="@+id/layoutProductionCountries"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/margin_16"
-                    android:layout_marginTop="@dimen/margin_16"
-                    app:label="@string/production_country"
-                    app:layout_constraintTop_toBottomOf="@id/layoutProductionCompanies"
-                    app:value="@{vm.productionCountries}" />
-
-                <com.trianglz.ui.views.custom.MovieDetailsRow
-                    android:id="@+id/layoutSpokenLanguages"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/margin_16"
-                    android:layout_marginTop="@dimen/margin_16"
-                    app:label="@string/spoken_languages"
-                    app:layout_constraintTop_toBottomOf="@id/layoutProductionCountries"
-                    app:value="@{vm.spokenLanguages}"
-                    android:layout_marginBottom="@dimen/margin_16"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintVertical_bias="0"/>
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.core.widget.NestedScrollView>
+            app:layout_constraintTop_toTopOf="parent"
+            app:goneUnless="@{vm.dataState instanceof DataState.Error}"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

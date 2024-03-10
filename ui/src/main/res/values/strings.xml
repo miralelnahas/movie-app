@@ -12,4 +12,5 @@
     <string name="production_company">Production Company</string>
     <string name="production_country">Production Country</string>
     <string name="spoken_languages">Spoken Languages</string>
+    <string name="no_internet">Please check your internet connection.</string>
 </resources>

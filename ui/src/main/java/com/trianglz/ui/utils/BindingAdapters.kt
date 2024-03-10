@@ -12,9 +12,10 @@ import com.squareup.picasso.Picasso
 import com.trianglz.ui.R
 
 object BindingAdapters {
+    @JvmStatic
     @BindingAdapter("app:goneUnless")
-    fun goneUnless(view: View, visible: Boolean) {
-        view.visibility = if (visible) View.VISIBLE else View.GONE
+    fun View.goneUnless(visible: Boolean) {
+        visibility = if (visible) View.VISIBLE else View.GONE
     }
 
     @JvmStatic
