@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MovieDetailsViewModel @Inject constructor(
-    private val savedStateHandle: SavedStateHandle,
+    savedStateHandle: SavedStateHandle,
     private val getMovieDetailsUseCase: GetMovieDetailsUseCase,
     isNetworkConnectedUseCase: IsNetworkConnectedUseCase
 ) : BaseViewModel<MovieDetailsIntent, MovieDetails>(isNetworkConnectedUseCase) {
@@ -24,11 +24,11 @@ class MovieDetailsViewModel @Inject constructor(
         }
     }
 
-    companion object {
-        const val ARG_ID = "id"
-    }
-
     override fun onTriggerEvent(eventType: MovieDetailsIntent) {
         // There are no events in movie details
+    }
+
+    companion object {
+        const val ARG_ID = "id"
     }
 }

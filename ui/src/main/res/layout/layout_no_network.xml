@@ -17,4 +17,4 @@
             android:text="@string/no_internet"
             app:drawableTopCompat="@drawable/ic_no_network" />
     </LinearLayout>
-</layout><!--TODO: put button to complete request-->
+</layout>

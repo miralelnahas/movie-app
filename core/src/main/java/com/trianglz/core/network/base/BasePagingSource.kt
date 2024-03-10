@@ -2,15 +2,10 @@ package com.trianglz.core.network.base
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 
 abstract class BasePagingSource<T : Any> : PagingSource<Int, T>() {
 
     protected var response: List<T> = listOf()
-
-    protected val _itemCount = MutableStateFlow(0)
-    val itemCount: StateFlow<Int> = _itemCount
 
     abstract override suspend fun load(params: LoadParams<Int>): LoadResult<Int, T>
 

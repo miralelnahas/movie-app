@@ -6,7 +6,6 @@ import com.trianglz.data.models.movieDetails.MovieDetails
 import com.trianglz.ui.R
 import com.trianglz.ui.base.BaseFragment
 import com.trianglz.ui.databinding.FragmentMovieDetailsBinding
-import com.trianglz.ui.utils.BindingAdapters.loadSrc
 import com.trianglz.ui.utils.Extensions.observe
 import com.trianglz.ui.viewmodels.movieDetails.MovieDetailsViewModel
 import com.trianglz.ui.views.custom.MovieDetailsHeaderInfo.Companion.setValue
@@ -30,11 +29,7 @@ class MovieDetailsFragment :
         super.setupObservers()
         observe(vm.dataState) {
             when (it) {
-                is DataState.Empty -> {
-
-                }
-
-                is DataState.Loading -> {
+                DataState.Loading -> {
                     startLoader()
                 }
 
@@ -46,16 +41,16 @@ class MovieDetailsFragment :
                 is DataState.Error -> {
                     stopLoader()
                 }
+
+                else -> {
+
+                }
             }
         }
     }
 
     private fun setViewValues(movieDetails: MovieDetails) {
         vb.layoutMovieDetails.apply {
-            tvTitle.text = movieDetails.originalTitle
-            ivPoster.loadSrc(movieDetails.posterPath)
-            toolbar.title = movieDetails.originalTitle
-            tvDescriptionValue.text = movieDetails.overview
             layoutGenres.setValue(movieDetails.genres.joinToString(", "))
             layoutProductionCompanies.setValue(movieDetails.productionCompanies.joinToString(", "))
             layoutProductionCountries.setValue(movieDetails.productionCountries.joinToString(", "))
@@ -76,17 +71,17 @@ class MovieDetailsFragment :
 
     private fun startLoader() {
         vb.layoutLoader.container.apply {
-            postDelayed({
+            post {
                 startShimmer()
-            }, 500)
+            }
         }
     }
 
     private fun stopLoader() {
         vb.layoutLoader.container.apply {
-            postDelayed({
+            post {
                 stopShimmer()
-            }, 500)
+            }
         }
     }
 }

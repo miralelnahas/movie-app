@@ -14,13 +14,12 @@ object Mapper {
     fun MovieEntity.toMovie(): Movie =
         Movie(id, movieId, title, imageUrl, String.format("%.1f", voteAverage))
 
-    //TODO: fix values
     fun MovieResponse.toMovieEntity(sortType: SortType): MovieEntity =
         MovieEntity(
             movieId = id,
             title = originalTitle,
             imageUrl = imageUrl ?: "",
-            releaseDate = "12345",
+            releaseDate = releaseDate,
             voteAverage = voteAverage,
             sortType = sortType
         )

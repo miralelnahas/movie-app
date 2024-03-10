@@ -2,10 +2,7 @@ package com.trianglz.ui.utils
 
 import android.view.View
 import android.widget.ImageView
-import android.widget.SearchView
-import android.widget.Toolbar
 import androidx.databinding.BindingAdapter
-import androidx.databinding.InverseBindingAdapter
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso

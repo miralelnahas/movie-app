@@ -2,6 +2,8 @@ package com.trianglz.ui.views.movies
 
 import android.content.Context
 import android.view.MenuItem
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
 import androidx.core.view.forEach
@@ -82,6 +84,9 @@ class MoviesFragment :
         observe(vm.searchUiModel.dataState) {
             onSearchStateChanged(it)
         }
+        observe(vm.sortType) {
+            updateMenuItemIcon(it)
+        }
     }
 
     private fun initSearchViews() {
@@ -115,6 +120,13 @@ class MoviesFragment :
             }
             handleMenuItemClick(appBar)
         }
+        moviesAdapter.addLoadStateListener {
+            if ((it.refresh is LoadState.NotLoading && it.prepend.endOfPaginationReached)
+                || it.mediator?.prepend?.endOfPaginationReached == true
+            ) {
+                stopLoader()
+            }
+        }
     }
 
     private fun handleMenuItemClick(appBar: SearchBar) {
@@ -130,7 +142,6 @@ class MoviesFragment :
 
     private fun onMenuItemClick(sortType: SortType) {
         sendIntent(MovieIntent.ChangeSortType(sortType))
-        updateMenuItemIcon(sortType)
     }
 
     private fun updateMenuItemIcon(selectedSortType: SortType) {
@@ -151,12 +162,11 @@ class MoviesFragment :
 
     private fun onMoviesStateChanged(state: DataState<PagingData<Movie>>) {
         when (state) {
-            is DataState.Loading -> {
+            DataState.Loading -> {
                 startLoader()
             }
 
             is DataState.Success -> {
-                stopLoader()
                 moviesAdapter.submitData(viewLifecycleOwner.lifecycle, state.data)
             }
 
@@ -164,12 +174,9 @@ class MoviesFragment :
                 stopLoader()
             }
 
-            is DataState.Empty -> {
-                //TODO: fix sort when clicking back after opening movie from top_rated
-                updateMenuItemIcon(SortType.MOST_POPULAR)
-            }
+            else -> {
 
-            else -> {}
+            }
         }
     }
 
@@ -179,26 +186,25 @@ class MoviesFragment :
                 searchAdapter.submitData(viewLifecycleOwner.lifecycle, state.data)
             }
 
-            //TODO: handle network error
             else -> {}
         }
     }
 
     private fun startLoader() {
         vb.layoutLoader.shimmerContainer.apply {
-            postDelayed(
-                {
-                    startShimmer()
-                }, 500
-            )
+            post {
+                visibility = VISIBLE
+                startShimmer()
+            }
         }
     }
 
     private fun stopLoader() {
         vb.layoutLoader.shimmerContainer.apply {
-            postDelayed({
+            post {
+                visibility = GONE
                 stopShimmer()
-            }, 500)
+            }
         }
     }
 }
