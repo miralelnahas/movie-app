@@ -29,10 +29,6 @@ class MovieDetailsFragment :
         super.setupObservers()
         observe(vm.dataState) {
             when (it) {
-                is DataState.Empty -> {
-
-                }
-
                 DataState.Loading -> {
                     startLoader()
                 }
@@ -44,6 +40,10 @@ class MovieDetailsFragment :
 
                 is DataState.Error -> {
                     stopLoader()
+                }
+
+                else -> {
+
                 }
             }
         }

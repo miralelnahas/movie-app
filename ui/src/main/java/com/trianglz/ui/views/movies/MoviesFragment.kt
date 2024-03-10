@@ -174,11 +174,9 @@ class MoviesFragment :
                 stopLoader()
             }
 
-            is DataState.Empty -> {
+            else -> {
 
             }
-
-            else -> {}
         }
     }
 
@@ -188,7 +186,6 @@ class MoviesFragment :
                 searchAdapter.submitData(viewLifecycleOwner.lifecycle, state.data)
             }
 
-            //TODO: handle network error
             else -> {}
         }
     }
@@ -209,9 +206,5 @@ class MoviesFragment :
                 stopShimmer()
             }
         }
-    }
-
-    companion object {
-        private const val LOADER_DELAY = 100L
     }
 }
