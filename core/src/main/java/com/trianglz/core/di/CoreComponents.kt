@@ -13,14 +13,14 @@ import dagger.hilt.components.SingletonComponent
 
 @Module
 @InstallIn(SingletonComponent::class)
-abstract class CoreComponents {
+interface CoreComponents {
 
     @Binds
-    abstract fun moviesRepository(moviesRepositoryImpl: MoviesRepositoryImpl): MoviesRepository
+    fun moviesRepository(moviesRepositoryImpl: MoviesRepositoryImpl): MoviesRepository
 
     @Binds
-    abstract fun moviesRemoteDs(moviesDataSourceImpl: MoviesDataSourceImpl): MoviesDataSource
+    fun moviesRemoteDs(moviesDataSourceImpl: MoviesDataSourceImpl): MoviesDataSource
 
     @Binds
-    abstract fun connectionManager(connectionManagerImpl: ConnectionManagerImpl): ConnectionManager
+    fun connectionManager(connectionManagerImpl: ConnectionManagerImpl): ConnectionManager
 }
