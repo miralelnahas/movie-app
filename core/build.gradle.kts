@@ -9,6 +9,19 @@ plugins {
 apply(from = "../common-configs.gradle")
 android {
     namespace = "com.trianglz.core"
+
+    buildTypes {
+        debug {
+            buildConfigField("String", "BASE_URL", "\"https://api.themoviedb.org/3/\"")
+        }
+        release {
+            buildConfigField("String", "BASE_URL", "\"https://api.themoviedb.org/3/\"")
+        }
+    }
+
+    buildFeatures {
+        buildConfig = true
+    }
 }
 
 dependencies {

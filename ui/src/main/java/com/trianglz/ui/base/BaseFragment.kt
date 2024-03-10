@@ -75,7 +75,7 @@ abstract class BaseFragment<T : ViewDataBinding, I : BaseIntent, D : Any>(@Layou
         try {
             findNavController().navigate(navDirections)
         } catch (e: Exception) {
-            //TODO: log exception
+
         }
     }
 

@@ -10,6 +10,7 @@ import com.trianglz.core.database.movies.MovieEntity
 import com.trianglz.core.database.remoteKeys.RemoteKeyEntity
 import com.trianglz.core.datasources.Mapper.toMovieEntity
 import com.trianglz.core.network.RetrofitClientExt.apiCall
+import com.trianglz.core.network.base.BasePagingSource
 import com.trianglz.core.network.movies.MoviesApi
 import com.trianglz.data.models.movies.SortType
 
@@ -28,7 +29,7 @@ class MoviesMediator(
         var response: List<MovieResponse> = listOf()
 
         val page = when (loadType) {
-            LoadType.REFRESH -> 1
+            LoadType.REFRESH -> BasePagingSource.LIST_STARTING_INDEX
 
             LoadType.PREPEND -> {
                 val remoteKey = getRemoteKeyForFirstItem(state)

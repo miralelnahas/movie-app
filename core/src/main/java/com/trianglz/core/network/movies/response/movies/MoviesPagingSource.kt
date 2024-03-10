@@ -13,7 +13,7 @@ class MoviesPagingSource(
     private val searchQuery: String = ""
 ) : BasePagingSource<Movie>() {
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Movie> {
-        val pageCursor = params.key ?: 1
+        val pageCursor = params.key ?: LIST_STARTING_INDEX
         return try {
             apiCall {
                 if (searchQuery.isEmpty()) {

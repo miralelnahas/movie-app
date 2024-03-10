@@ -189,7 +189,7 @@ class MoviesFragment :
             postDelayed(
                 {
                     startShimmer()
-                }, 500
+                }, LOADER_DELAY
             )
         }
     }
@@ -198,7 +198,11 @@ class MoviesFragment :
         vb.layoutLoader.shimmerContainer.apply {
             postDelayed({
                 stopShimmer()
-            }, 500)
+            }, LOADER_DELAY)
         }
+    }
+
+    companion object {
+        private const val LOADER_DELAY = 500L
     }
 }

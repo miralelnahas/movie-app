@@ -3,6 +3,7 @@ package com.trianglz.core.di
 import android.content.Context
 import androidx.room.Room
 import com.google.gson.Gson
+import com.trianglz.core.BuildConfig
 import com.trianglz.core.database.AppDatabase
 import com.trianglz.core.database.movies.MoviesDao
 import com.trianglz.core.database.remoteKeys.RemoteKeysDao
@@ -34,7 +35,7 @@ class AppComponents {
         val httpClient = OkHttpClient.Builder()
             .addInterceptor(authorizationInterceptor).build()
         return Retrofit.Builder()
-            .baseUrl("https://api.themoviedb.org/3/")
+            .baseUrl(BuildConfig.BASE_URL)
             .client(httpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
